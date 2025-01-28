@@ -54,7 +54,7 @@ BCOV_POLICY = "BCpkADawqM1VmXspFMod94-pT7xDCvmBEYt8U7f0mRB6XnG5huPE7I9qjhDW0qpx3
 bc_url = (f"https://edge.api.brightcove.com/playback/v1/accounts/{ACCOUNT_ID}/videos")
 bc_hdr = {"BCOV-POLICY": BCOV_POLICY}
 
-@bot.on_message(filters.command(["cw"]))
+@bot.on_message(filters.command(["cw"])& ~filters.edited)
 async def account_login(bot: Client, m: Message):
     global cancel
     cancel = False
@@ -65,7 +65,7 @@ async def account_login(bot: Client, m: Message):
         "password": "",
         "deviceIMEI": "3b2da0fbef3c31dd",
         "deviceModel": "Xiaomi Redmi Note 7S",
-        "deviceVersion": "Q(Android 10.0)",
+        "deviceVersion": "R(Android 10.0)",
         "email": "",
         "deviceToken": "cB_H-cjxQ_mWRDc5xg4mMi:APA91bH5ki48Gm-gn21t-tmPp8bF2hELH30mzQzkuhptqwBViTNJl-k2sbeuGXsxwUa1tfN-DSeLElCbRCTccSLfC0fR4IZjWjbKp92ieS3FuvyCOdEPt1Y"
        }
@@ -76,7 +76,7 @@ async def account_login(bot: Client, m: Message):
         "Appver": "97",
         "Apptype": "android",
         "Content-Type": "application/json; charset=UTF-8",
-        "Content-Length": "313",
+        "Content-Length": "329",
         "Accept-Encoding": "gzip, deflate",
         "user-agent": "okhttp/5.0.0-alpha.2",
         'Connection': 'Keep-Alive'
@@ -146,7 +146,7 @@ async def account_login(bot: Client, m: Message):
         t_name=(data["topicName"].replace(" ",""))
         tid = (data["id"])
         scraper = cloudscraper.create_scraper()
-        ffx = s.get("https://elearn.crwilladmin.com/api/v7/my-batch/"+raw_text2+"?redirectBy=mybatch&topicId="+tid+"&token="+token).json()
+        ffx = s.get("https://elearn.crwilladmin.com/api/v7/batch-detail/"+raw_text2+"?redirectBy=mybatch&topicId="+tid+"&token="+token).json()
             #ffx = json.loads(html3)
         vcx =ffx["data"]["class_list"]["batchDescription"]
         vvx =ffx["data"]["class_list"]["classes"]
@@ -176,7 +176,7 @@ async def account_login(bot: Client, m: Message):
 
             #gettting all json with diffrent topic id https://elearn.crwilladmin.com/api/v1/comp/batch-detail/881?redirectBy=mybatch&topicId=2324&token=d76fce74c161a264cf66b972fd0bc820992fe57
             #scraper = cloudscraper.create_scraper()
-            html4 = s.get("https://elearn.crwilladmin.com/api/v7/my-batch/"+raw_text2+"?redirectBy=mybatch&topicId="+t+"&token="+token).content
+            html4 = s.get("https://elearn.crwilladmin.com/api/v7/batch-detail/"+raw_text2+"?redirectBy=mybatch&topicId="+t+"&token="+token).content
             ff = json.loads(html4)
             #vc =ff.json()["data"]["class_list"]["batchDescription"]
             mm = ff["data"]["class_list"]["batchName"].replace("/ "," ")
@@ -202,7 +202,7 @@ async def account_login(bot: Client, m: Message):
                             video_url = video_source["src"]
                             #print(video_url)
                             #scraper = cloudscraper.create_scraper()
-                            html5 = s.get("https://elearn.crwilladmin.com/api/v1/livestreamToken?type=brightcove&vid="+vidid+"&token="+token).content
+                            html5 = s.get("https://elearn.crwilladmin.com/api/v7/livestreamToken?type=brightcove&vid="+vidid+"&token="+token).content
                             surl = json.loads(html5)
                             stoken = surl["data"]["token"]
                             #print(stoken)
@@ -222,7 +222,7 @@ async def account_login(bot: Client, m: Message):
                             video_url1 = video_source1["src"]
                             #print(video_url)
                             #scraper = cloudscraper.create_scraper()
-                            html8 = s.get("https://elearn.crwilladmin.com/api/v1/livestreamToken?type=brightcove&vid="+vidid+"&token="+token).content
+                            html8 = s.get("https://elearn.crwilladmin.com/api/v7/livestreamToken?type=brightcove&vid="+vidid+"&token="+token).content
                             surl1 = json.loads(html8)
                             stoken1 = surl1["data"]["token"]
                             #print(stoken)
